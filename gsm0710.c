@@ -1506,12 +1506,12 @@ int main(int argc, char *argv[], char *env[])
 	programName = argv[0];
 	if(_debug)
 	{
-		openlog(programName, LOG_NDELAY | LOG_PID | LOG_PERROR  , LOG_LOCAL0);//pode ir até 7
+		openlog(programName, LOG_NDELAY | LOG_PID | LOG_PERROR  , LOG_LOCAL0);//pode ir ate 7
 		_priority = LOG_DEBUG;
 	}
 	else
 	{
-		openlog(programName, LOG_NDELAY | LOG_PID , LOG_LOCAL0 );//pode ir até 7
+		openlog(programName, LOG_NDELAY | LOG_PID , LOG_LOCAL0 );//pode ir ate 7
 		_priority = LOG_INFO;
 	}
 

@@ -1,29 +1,21 @@
-# Comment/uncomment the following line to disable/enable debugging
-DEBUG = y
+EXE= gsmMuxd
+OBJ= gsm0710.o buffer.o
 
-TARGET = gsmMuxd
-SRC = gsm0710.c buffer.c
-OBJS = gsm0710.o buffer.o
+DEBUG=-g -lefence
+SOFLAGS= 
+CFLAGS= -Wall 
+LIBS= -lm
 
-CC = gcc
-LD = gcc
-CFLAGS = -Wall
-LDLIBS = -lm
+all: $(EXE) $(OBJ) $(SO)
 
-ifeq ($(DEBUG),y)
-  CFLAGS += -DDEBUG
-endif
+gsmMuxd: gsm0710.o buffer.o
+	cc $(CFLAGS) $(LIBS) $(OBJ) -o gsmMuxd 
+	
+gsm0710.o: gsm0710.c gsm0710.h
+	cc $(CFLAGS) -c gsm0710.c -o gsm0710.o
 
-
-all: $(TARGET)
+buffer.o: buffer.c buffer.h
+	cc $(CFLAGS) -c buffer.c -o buffer.o
 
 clean:
-	rm -f $(OBJS) $(TARGET)
-
-%.o: %.c
-	$(CC) $(CFLAGS) -c -o $@ $<
-
-$(TARGET): $(OBJS)
-	$(LD) $(LDLIBS) -o $@ $(OBJS)
-
-.PHONY: all clean
+	rm -f *.o $(EXE) $(OBJ) $(SO)
